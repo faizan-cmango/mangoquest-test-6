@@ -1,0 +1,52 @@
+project: counter4d
+sad_version: "0.1"
+scope: full
+blocks:
+  - id: counter4d
+    owner: kemi
+    sad_sections: ["3.1"]
+    interfaces: [IDD-CTRL]
+    idd_files: [idd/ctrl.yaml]
+    scan_notes: "none: single clock, synchronous reset, no gating, no memories; every flop scannable (scan ports are added by DFT insertion, not part of this interface)"
+peer_blocks: []
+sections:
+  - {id: "1", title: Scope and context, status: complete, req_range: []}
+  - {id: "2", title: Block decomposition, status: complete, req_range: []}
+  - {id: "3.1", title: Counter behaviour, status: complete, req_range: [REQ-3.1.1, REQ-3.1.2, REQ-3.1.3, REQ-3.1.4, REQ-3.1.5, REQ-3.1.6, REQ-3.1.7, REQ-3.1.8]}
+  - {id: "6", title: Performance power and area, status: complete, req_range: []}
+  - {id: "7", title: Risk register, status: complete, req_range: []}
+  - {id: "8", title: Open items, status: complete, req_range: []}
+documents:
+  idd:       {files: [idd/ctrl.yaml], authority: "interface behaviour, names, widths, reset values, timing"}
+  vps:       {file: vps.yaml,       authority: "what must be proven (scenarios)"}
+  rtm:       {file: rtm.yaml,       authority: "requirement text, owner, verification method"}
+  riskmap:   {file: riskmap.yaml,   authority: "risk class per block and the targets it implies"}
+  clocks:    {file: clocks.yaml,    authority: "clocks, resets, CDC pairs"}
+  errata:    {file: errata.yaml,    authority: "amendments after release"}
+  decisions: {file: decisions.yaml, authority: "architecture decision records"}
+optional_documents:
+  regmap:   {not_applicable: "no registers or bus interfaces (brief: out of scope)"}
+  power:    {not_applicable: "no power management (brief: out of scope)"}
+  debug:    {not_applicable: "no debug function requested"}
+  security: {not_applicable: "no security function requested"}
+  dft:      {not_applicable: "full scan, one chain, mux-D, stuck-at and transition faults are added by Tola's insertion; no spec document is needed (see scan_notes)"}
+  brs:      {file: brs.yaml}
+precedence: [errata, idd, clocks, riskmap, rtm, vps, sad_yaml, sad_md]
+waivers: []
+area_budget:
+  not_applicable: "the brief gives no area target; physical design uses typical flow defaults"
+pin_intent:
+  pins:
+    - {port: clk, side: west, order: 1, group: control}
+    - {port: rst_n, side: west, order: 2, group: control}
+    - {port: en, side: west, order: 3, group: control}
+    - {port: scan_in, side: west, order: 4, group: scan}
+    - {port: scan_en, side: west, order: 5, group: scan}
+    - {port: "count[0]", side: east, order: 1, group: count}
+    - {port: "count[1]", side: east, order: 2, group: count}
+    - {port: "count[2]", side: east, order: 3, group: count}
+    - {port: "count[3]", side: east, order: 4, group: count}
+    - {port: scan_out, side: east, order: 5, group: scan}
+feasibility:
+  blocks:
+    - {block: counter4d, clock: clk, target_mhz: 100, fmax_mhz: 1257.9, headroom_pct: 1157.9, area_um2: 140.1, method: opensta_liberty, confidence: 0.5, meets_target: true, report: runs/feasibility/counter4d/20261125-163123-e23fe1/report.json}

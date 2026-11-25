@@ -1,0 +1,12 @@
+rtm: spec/counter4d/rtm.yaml@v0.1
+block: counter4d
+requirements:
+  - {id: REQ-3.1.1, section: "3.1", owner: kemi, risk: LOW, verif_method: simulation, source: {list: brief, entry: 1}, text: "At a rising clk edge while rst_n is 0, the block shall set count to 0, whatever the value of en."}
+  - {id: REQ-3.1.2, section: "3.1", owner: kemi, risk: LOW, verif_method: simulation, source: {list: brief, entry: 2}, text: "At a rising clk edge while rst_n is 1 and en is 1, the block shall change count to its previous value plus 1."}
+  - {id: REQ-3.1.3, section: "3.1", owner: kemi, risk: LOW, verif_method: simulation, source: {list: brief, entry: 2}, text: "At a rising clk edge while rst_n is 1 and en is 1, the block shall change count from 15 to 0."}
+  - {id: REQ-3.1.4, section: "3.1", owner: kemi, risk: LOW, verif_method: simulation, source: {list: brief, entry: 2}, text: "At a rising clk edge while rst_n is 1 and en is 0, the block shall keep count at its previous value."}
+  - {id: REQ-3.1.5, section: "3.1", owner: kemi, risk: LOW, verif_method: simulation, source: {list: brief, entry: 3}, text: "The block shall change count only at a rising clk edge, including while rst_n is 0."}
+  - {id: REQ-3.1.6, section: "3.1", owner: kemi, risk: LOW, verif_method: simulation, source: {list: brief, entry: 2}, text: "While rst_n is 0 and en is 1 at a rising clk edge, the block shall set count to 0 rather than increment it."}
+  - {id: REQ-3.1.7, section: "3.1", owner: kemi, risk: LOW, verif_method: inspection, source: {list: brief, entry: 4}, evidence: "the top module declares exactly clk, rst_n, en, count[3:0] and no parameters", text: "The block shall have exactly the input ports clk, rst_n and en and the 4-bit output port count, and no parameters."}
+  - {id: REQ-3.1.8, section: "3.1", owner: kemi, risk: LOW, verif_method: analysis, source: {list: brief, entry: 5}, evidence: "static timing at clk 100 MHz (10 ns) with feasibility report", text: "The block shall meet the behaviour of REQ-3.1.1 to REQ-3.1.6 with clk at 100 MHz (10 ns period)."}
+retired: {}

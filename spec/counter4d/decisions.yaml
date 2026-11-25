@@ -1,0 +1,37 @@
+decisions:
+  - id: ADR-01
+    date: 2026-11-25
+    status: proposed
+    title: "Interface IDD is one level-class file, idd/ctrl.yaml"
+    req_ids: [REQ-3.1.1, REQ-3.1.2, REQ-3.1.7]
+    context: "The brief has no bus; the package needs one IDD for the four ports."
+    alternatives: ["no IDD", "one level-class IDD"]
+    decision: "One IDD, protocol_class level, holding clk, rst_n, en, count."
+    decided_by: {actor_ref: faizan@chipmango.com, role: adr}
+  - id: ADR-02
+    date: 2026-11-25
+    status: proposed
+    title: "Area budget not given, so not_applicable"
+    req_ids: [REQ-3.1.8]
+    context: "The brief names no area target."
+    alternatives: ["invent a number", "not_applicable"]
+    decision: "area_budget is not_applicable; only timing at 100 MHz is a target."
+    decided_by: {actor_ref: faizan@chipmango.com, role: adr}
+  - id: ADR-03
+    date: 2026-11-25
+    status: proposed
+    title: "Board rail currents and the 1.8 V LDO gap"
+    req_ids: [REQ-3.1.8]
+    context: "The brief gives rail voltages but no currents, and the board standard has only a 3.3 V LDO."
+    alternatives: ["use the 3.3 V LDO", "keep 1.8 V as the brief says and flag the part gap"]
+    decision: "Keep 1.8 V; chip load 5 mA, 5 V rails 10 mA (LDO input, simplest margin); BRS-9 flags the missing Device Model, supplied by a person."
+    decided_by: {actor_ref: faizan@chipmango.com, role: adr}
+  - id: ADR-04
+    date: 2026-11-25
+    status: proposed
+    title: "Pre-clock output value and reset-edge wording"
+    req_ids: [REQ-3.1.1, REQ-3.1.5]
+    context: "With a synchronous reset, count is unknown until the first rising edge with rst_n 0."
+    alternatives: ["define power-up value", "leave undefined until the first reset edge"]
+    decision: "Undefined until first reset edge; the harness applies reset first. Simplest option."
+    decided_by: {actor_ref: faizan@chipmango.com, role: adr}
