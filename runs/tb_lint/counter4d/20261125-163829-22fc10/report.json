@@ -1,0 +1,76 @@
+{
+  "kind": "lint",
+  "schema_version": 2,
+  "tool": "tb_lint",
+  "block": "counter4d",
+  "inputs": [
+    {
+      "path": "verif/counter4d/testplan.yaml",
+      "version": 1,
+      "sha256": ""
+    },
+    {
+      "path": "verif/test_counter4d.py",
+      "version": 1,
+      "sha256": ""
+    },
+    {
+      "path": "rtl/counter4d.sv",
+      "version": 2,
+      "sha256": ""
+    }
+  ],
+  "timed_out": false,
+  "stopped": "",
+  "image": "quest-eda-tools:2026.11.1",
+  "tool_version": "",
+  "top": "",
+  "clean": false,
+  "errors": [
+    {
+      "file": "verif/test_counter4d.py",
+      "line": 27,
+      "column": null,
+      "code": "DAYO-TBS-015",
+      "message": "file: uncited values: 2"
+    },
+    {
+      "file": "verif/test_counter4d.py",
+      "line": 207,
+      "column": null,
+      "code": "DAYO-TBS-015",
+      "message": "test_random_seeded: uncited values: 0.05, 3, 0.75"
+    },
+    {
+      "file": "verif/test_counter4d.py",
+      "line": 120,
+      "column": null,
+      "code": "DAYO-TBS-022",
+      "message": "start: reads self.dut.test_mode, not a port of the IDD"
+    },
+    {
+      "file": "verif/test_counter4d.py",
+      "line": 122,
+      "column": null,
+      "code": "DAYO-TBS-022",
+      "message": "start: reads self.dut.scan_en, not a port of the IDD"
+    },
+    {
+      "file": "verif/test_counter4d.py",
+      "line": 124,
+      "column": null,
+      "code": "DAYO-TBS-022",
+      "message": "start: reads self.dut.scan_in, not a port of the IDD"
+    }
+  ],
+  "warnings": [],
+  "error_count": 5,
+  "warning_count": 0,
+  "failure": "",
+  "pack": "",
+  "pack_clean": null,
+  "pack_error_count": 0,
+  "pack_findings": [],
+  "pack_not_evaluated": {},
+  "self_check_clean": null
+}
