@@ -1,0 +1,49 @@
+{
+  "kind": "lint",
+  "schema_version": 2,
+  "tool": "style_lint",
+  "block": "counter4d",
+  "inputs": [
+    {
+      "path": "rtl/counter4d.sv",
+      "version": 1,
+      "sha256": "sha256:1a1f45779ea0031c9ccd622816ff3bc1a0e67c2fe9a3aedf6d3fed7d6d3daa58"
+    }
+  ],
+  "timed_out": false,
+  "stopped": "",
+  "image": "quest-eda-tools:2026.11.1",
+  "tool_version": "",
+  "top": "",
+  "clean": true,
+  "errors": [],
+  "warnings": [],
+  "error_count": 0,
+  "warning_count": 0,
+  "failure": "",
+  "pack": "kemi-lint@1.2.0",
+  "pack_clean": false,
+  "pack_error_count": 1,
+  "pack_findings": [
+    {
+      "rule": "KEMI-STY-017",
+      "check": "ast:register_reset",
+      "severity": "error",
+      "file": "rtl/counter4d.sv",
+      "line": 26,
+      "message": "cnt_value_ff is written in an always_ff its reset does not assign",
+      "waived": false
+    },
+    {
+      "rule": "KEMI-STY-003",
+      "check": "ast:section_order",
+      "severity": "warning",
+      "file": "rtl/counter4d.sv",
+      "line": null,
+      "message": "section A has no banner",
+      "waived": false
+    }
+  ],
+  "pack_not_evaluated": {},
+  "self_check_clean": false
+}

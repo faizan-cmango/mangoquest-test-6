@@ -1,0 +1,18 @@
+block: counter4d
+findings:
+  - {rule: KEMI-STY-002, status: pass, finding: "header complete", location: rtl/counter4d.sv:1}
+  - {rule: KEMI-STY-004, status: pass, finding: "clk, rst_n, en, then count, IDD order", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-010, status: pass, finding: "all combinational logic is an assign", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-012, status: pass, finding: "one cnt feature sub-banner", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-016, status: pass, finding: "one always_ff, one job", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-019, status: pass, finding: "cnt_value_next pairs cnt_value_ff", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-023, status: pass, finding: "only rst_n is active-low", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-033, status: pass, finding: "sta at 10 ns: setup WNS 7.04 ns worst corner, far under 70 percent", location: rtl/counter4d.sdc}
+  - {rule: KEMI-STY-042, status: pass, finding: "probe order given", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-043, status: pass, finding: "gotchas in header: X before first reset edge, sync reset", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-044, status: pass, finding: "comments give reasons", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-050, status: pass, finding: "no FSM, one register: nosplit stated in header", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-051, status: pass, finding: "no bug-prone logic, no CDC", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-053, status: pass, finding: "no FSM", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-054, status: pass, finding: "no FSM or handshake; wrap assertion in F", location: rtl/counter4d.sv}
+  - {rule: KEMI-STY-091, status: pass, finding: "no parameters (REQ-3.1.7); 4-bit width is fixed by IDD", location: rtl/counter4d.sv}
