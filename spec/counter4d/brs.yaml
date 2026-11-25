@@ -1,0 +1,26 @@
+brs: spec/counter4d/brs.yaml@v0.1
+project: counter4d
+sad_version: "0.1"
+board: counter4d_eval
+requirements:
+  - {id: BRS-1, text: "The board shall take 5 V input on a header (rail VBUS).", category: power, req_ids: [REQ-3.1.8], verif_method: inspection}
+  - {id: BRS-2, text: "The board shall pass VBUS through a fuse to rail VBUS_F and then a reverse-protection diode to rail +5V.", category: power, req_ids: [REQ-3.1.8], verif_method: inspection}
+  - {id: BRS-3, text: "The board shall make rail VDD_1V8 from +5V with a 1.8 V LDO and power the chip core and pins from it.", category: power, req_ids: [REQ-3.1.8], verif_method: inspection}
+  - {id: BRS-4, text: "The board shall bring clk, rst_n and en to headers at 1.8 V logic.", category: interface, req_ids: [REQ-3.1.1, REQ-3.1.2], verif_method: inspection}
+  - {id: BRS-5, text: "The board shall bring count[3:0] to headers at 1.8 V logic.", category: interface, req_ids: [REQ-3.1.2], verif_method: inspection}
+  - {id: BRS-6, text: "The board shall bring the scan pins scan_in, scan_en and scan_out to headers at 1.8 V logic.", category: test, req_ids: [REQ-3.1.7], verif_method: inspection}
+  - {id: BRS-7, text: "The board shall have test points on clk and count[3:0].", category: test, req_ids: [REQ-3.1.2], verif_method: inspection}
+  - {id: BRS-8, text: "The board shall be a 2-layer board of fabrication class jlc-2l-standard.", category: mechanical, req_ids: [REQ-3.1.8], verif_method: inspection}
+  - {id: BRS-9, text: "The chip Device Model, the 1.8 V regulator Device Model and the parts snapshot are not in the board standard; they are supplied by a person at board/counter4d_eval/.", category: other, req_ids: [REQ-3.1.8], verif_method: review}
+interfaces:
+  - {name: ctrl_header, kind: header, connector: "2.54 mm header, 1.8 V logic", signals: [clk, rst_n, en, count, scan_in, scan_en, scan_out], idd: IDD-CTRL}
+power_rails:
+  - {name: VBUS, voltage_v: 5.0, current_ma: 10, tolerance_pct: 5}
+  - {name: VBUS_F, voltage_v: 5.0, current_ma: 10, tolerance_pct: 5}
+  - {name: "+5V", voltage_v: 4.7, current_ma: 10, tolerance_pct: 5}
+  - {name: VDD_1V8, voltage_v: 1.8, current_ma: 5, tolerance_pct: 5}
+environment: {ambient_min_c: 0, ambient_max_c: 70, bus_voltage_min_v: 4.75, bus_voltage_max_v: 5.25}
+constraints: {header_spacing_mm: 2.54, assembly: "hand or JLC standard assembly"}
+firmware_consumer: none
+mechanical: {layers: 2}
+fab_class: jlc-2l-standard

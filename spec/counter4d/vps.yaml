@@ -1,0 +1,63 @@
+vps: spec/counter4d/vps.yaml@v0.1
+block: counter4d
+scenarios:
+  - id: VPS-01
+    slug: reset
+    req_ids: [REQ-3.1.1, REQ-3.1.5]
+    observe: [IDD-CTRL.count]
+    intent: "Run some increments, then drive rst_n to 0 at a falling edge for two rising edges."
+    expected: "count is 0 after the first rising edge with rst_n 0 and stays 0 while rst_n is 0."
+    checks: ["count == 0 while reset"]
+    distinguishes: {count_at: [zero, mid, max]}
+    formal: false
+  - id: VPS-02
+    slug: hold
+    req_ids: [REQ-3.1.4]
+    observe: [IDD-CTRL.count]
+    intent: "After reset, enable for three edges so count is 3, then drive en to 0 for several edges."
+    expected: "count stays at 3 while en is 0."
+    checks: ["count == 3 while low(en)"]
+    distinguishes: {en_state: [low_after_count]}
+    formal: false
+  - id: VPS-03
+    slug: increment
+    req_ids: [REQ-3.1.2, REQ-3.1.8]
+    observe: [IDD-CTRL.count]
+    intent: "After reset, drive en to 1 for one rising edge with count 0."
+    expected: "count becomes 1 after that edge."
+    checks: ["count == 1 within 1 cycles after rise(en)"]
+    distinguishes: {count_at: [zero, mid]}
+    formal: false
+  - id: VPS-04
+    slug: wrap
+    req_ids: [REQ-3.1.3]
+    observe: [IDD-CTRL.count]
+    intent: "Count to 15 with en 1, then give one more rising edge with en 1."
+    expected: "count goes from 15 to 0."
+    checks: ["count == 0 within 1 cycles after rise(en)"]
+    distinguishes: {count_at: [max]}
+    formal: false
+  - id: VPS-05
+    slug: reset_priority
+    req_ids: [REQ-3.1.6, REQ-3.1.1]
+    observe: [IDD-CTRL.count]
+    intent: "With count nonzero and en 1, drive rst_n to 0 while en stays 1."
+    expected: "count is 0 after the edge and stays 0 while rst_n is 0 and en is 1."
+    checks: ["count == 0 while reset"]
+    distinguishes: {en_state: [high_in_reset]}
+    formal: false
+  - id: VPS-06
+    slug: coverage_all_values
+    req_ids: [REQ-3.1.2, REQ-3.1.3]
+    observe: [IDD-CTRL.count]
+    intent: "Run 17 enabled edges from reset so count visits every value 0 to 15 and wraps."
+    expected: "count takes each value 0 to 15 and then 0 again."
+    checks: ["count != 0 within 1 cycles after rise(en) if low(en)"]
+    distinguishes: {count_at: [zero, mid, max]}
+    formal: false
+environment:
+  clk: "100 MHz, starts low, first rising edge half a period after inputs are first driven"
+  en: "changes only at falling clk edges"
+  rst_n: "changes only at falling clk edges"
+  illegal_inputs: ["any input change in the timestep of a rising clk edge"]
+retired: {}
